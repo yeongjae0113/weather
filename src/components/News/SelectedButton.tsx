@@ -29,7 +29,6 @@ const SelectedButton = ({language, setLanguage, setCategory} : {language: string
           한국 뉴스
         </div>
         <div
-          // onClick={() => clickNews('zh', category)}
           onClick={() => clickNews('zh')}
           style={{
             cursor: 'pointer',

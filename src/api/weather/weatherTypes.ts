@@ -22,6 +22,10 @@ export interface HourlyWeatherData {
 }
 
 export interface WeatherResponse {
+  coord: {
+    lon: number
+    lat: number
+  }
   weather: {
     description: string // 날씨 설명
     icon: string        // 날씨 아이콘
@@ -60,9 +64,16 @@ export interface HourlyChartProps {
 
 
 export interface WeatherMaps {
-  coord: {lat: number, lon: number}
-  main: {temp: number}
-  weather: {description: string}[]
+  coord: {
+    lat: number,
+    lon: number
+  }
+  main: {
+    temp: number
+  }
+  weather: {
+    description: string
+  }[]
 }
 
 export interface WeahterMapProps {

@@ -14,12 +14,7 @@ const CurrentWeather = ({ weatherData }: CurrentWeatherProps) => {
       alignContent: 'center',
     }
   }
-
-
-  const doSomething = (latitude: number, longtitude: number) => {
-    console.log('위도: ', latitude, '경도: ', longtitude)
-  }
-
+  
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       doSomething(position.coords.latitude, position.coords.longitude)
@@ -28,7 +23,9 @@ const CurrentWeather = ({ weatherData }: CurrentWeatherProps) => {
     })
   }, [])
 
-
+  const doSomething = (latitude: number, longtitude: number) => {
+    console.log('위도: ', latitude, '경도: ', longtitude)
+  }
 
   function getWindDirection(deg: number): string {
     if (deg >= 0 && deg < 45) return "북풍"

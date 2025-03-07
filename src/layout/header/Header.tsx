@@ -100,18 +100,6 @@ const Header = () => {
           >
             대기질뉴스
           </div>
-          <div
-            onClick={() => handleNavigation('kWeather', '/kWeather')}
-            style={{
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              fontSize: '1.1rem',
-              borderBottom: selectedPage === 'kWeather' ? '2px solid black' : 'none',
-              color: selectedPage === 'kWeather' ? 'black' : '#888'
-            }}
-          >
-            한국 날씨
-          </div>
         </div>
       
         <CityInput setCity={setCity} />

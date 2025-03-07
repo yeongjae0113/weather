@@ -53,11 +53,11 @@ const WeatherNews = () => {
           <>
             <div
               style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "1rem",
-                justifyContent: "space-between",
-                margin: "1rem 3rem",
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '1rem',
+                justifyContent: 'space-between',
+                margin: '1rem 3rem',
               }}
             >
               {currentArticles.map((article, index) => (
@@ -65,53 +65,67 @@ const WeatherNews = () => {
                   key={index}
                   onClick={() => window.open(article.url, "_blank")}
                   style={{
-                    display: "flex",
-                    border: "1px solid #ddd",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                    padding: "1rem",
-                    width: "48%",
+                    display: 'flex',
+                    border: '1px solid #ddd',
+                    borderRadius: '10px',
+                    cursor: 'pointer',
+                    padding: '1rem',
+                    width: '48%',
                     height: '15rem',
-                    boxSizing: "border-box",
+                    boxSizing: 'border-box',
                   }}
                 >
-                  <div style={{paddingRight: "1rem", flex: "1", maxWidth: "40%", height: '100%'}}>
+                  <div style={{paddingRight: '1rem', flex: '1', maxWidth: '40%', height: '100%'}}>
                     {article.urlToImage && (
                       <img
                         src={article.urlToImage}
                         alt="뉴스 이미지"
                         style={{
-                          width: "100%",
-                          height: "100%",
-                          borderRadius: "10px",
-                          objectFit: "cover",
+                          width: '100%',
+                          height: '100%',
+                          borderRadius: '10px',
+                          objectFit: 'cover',
                         }}
                       />
                     )}
                   </div>
-                  <div style={{flex: "2", minWidth: "0", height: '100%'}}>
+                  <div style={{flex: '2', minWidth: '0', height: '100%'}}>
                     <h2
                       style={{
                         height: '14%',
-                        marginTop: "0.3rem",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
+                        marginTop: '0.3rem',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
                       }}
                     >
                       {article.title}
                     </h2>
-                    <p style={{height: "42%", fontSize: '1rem', overflow: "hidden", textOverflow: "ellipsis", display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: "vertical"}}>
+                    <p style={{height: '42%', fontSize: '1rem', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical'}}>
                       {article.description}
                     </p>
-                    <p style={{marginBottom: '0rem', fontSize: '0.8rem'}}>
-                      <strong>작성자:</strong> {article.author || "미정"}
+                    <p style={{display: 'flex', width: '100%', marginBottom: '0rem', fontSize: '0.8rem'}}>
+                      <strong style={{width: '10%'}}>작성자:</strong> 
+                      <strong
+                        style={{
+                          width: '90%',
+                          height: '10%',
+                          fontWeight: 'normal',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 1,
+                          WebkitBoxOrient: 'vertical'
+                        }}
+                      >
+                        &nbsp; {article.author || '미정'}
+                      </strong>
                     </p>
-                    <div style={{display: "flex", fontSize: '0.8rem'}}>
+                    <div style={{display: 'flex', fontSize: '0.8rem'}}>
                       <p>
                         {new Date(article.publishedAt).toLocaleDateString()}
                       </p>
-                      <p style={{marginLeft: "1rem"}}>
+                      <p style={{marginLeft: '1rem'}}>
                         | &nbsp;&nbsp;&nbsp;{article.source.name}
                       </p>
                     </div>
@@ -123,9 +137,9 @@ const WeatherNews = () => {
               count={Math.ceil((newsData?.articles.length || 0) / articlesPage)}
               page={currentPage}
               onChange={handlePageChange}
-              color="secondary"
-              size="large"
-              style={{ margin: "1rem auto", display: "flex", justifyContent: "center" }}
+              color='secondary'
+              size='large'
+              style={{margin: '1rem auto', display: 'flex', justifyContent: 'center'}}
             />
           </>
         ) : (

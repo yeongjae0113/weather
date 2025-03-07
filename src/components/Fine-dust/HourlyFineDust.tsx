@@ -25,7 +25,7 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
     setGroupedData(grouped);
     
     if (Object.keys(grouped).length > 0) {
-      setSelectedDate(Object.keys(grouped)[0])  // 첫 번째 날짜로 초기화
+      setSelectedDate(Object.keys(grouped)[1])  // 첫 번째 날짜로 초기화
     }
     console.log('asjkldh: ', forecastData)
   }, [forecastData])
@@ -64,7 +64,7 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                 style={{
                   display: 'flex',
                   flexWrap: 'wrap',
-                  gap: '1rem',
+                  gap: '0.4rem',
                   justifyContent: 'center',
                   marginTop: '1rem',
                 }}
@@ -76,29 +76,29 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                       style={{
                         flex: '1 1 6%',
                         boxSizing: 'border-box',
-                        padding: '0.5rem 1rem 1rem 1rem',
+                        padding: '0.5rem 0.5rem 0.5rem 0.8rem',
                         border: '2px solid #f5f5f5',
                         borderRadius: '10px',
                         backgroundColor: '#ffffff'
                       }}
                     >
                       <p style={{fontWeight: 'bold'}}>{new Date(forecast.dt * 1000).toLocaleTimeString([], {hour: '2-digit', hour12: false})}</p>
-                        <p style={{color: getFineDust(forecast.components.pm10).color, display: 'flex', alignItems: 'center', fontSize: '15px'}}>
+                        <p style={{color: getFineDust(forecast.components.pm10).color, display: 'flex', alignItems: 'center', fontSize: '14.6px', fontWeight: 'bold'}}>
                         {getFineDust(forecast.components.pm10).status}
                         <Icon
                           style={{
-                            fontSize: "23px",
+                            fontSize: "20px",
                             marginLeft: "0.5rem",
                             color: getFineDust(forecast.components.pm10).color,
                           }}
                           component={getFineDust(forecast.components.pm10).icon}  
                         />
                       </p>
-                      <p style={{color: getUltraFineDust(forecast.components.pm2_5).color, display: 'flex', alignItems: 'center', fontSize: '15px'}}>
+                      <p style={{color: getUltraFineDust(forecast.components.pm2_5).color, display: 'flex', alignItems: 'center', fontSize: '14.6px', fontWeight: 'bold'}}>
                         {getUltraFineDust(forecast.components.pm2_5).status}
                         <Icon
                           style={{
-                            fontSize: "23px",
+                            fontSize: "20px",
                             marginLeft: "0.5rem",
                             color: getUltraFineDust(forecast.components.pm2_5).color,
                           }}
@@ -117,7 +117,7 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                 style={{
                   display: 'flex',
                   flexWrap: 'wrap',
-                  gap: '1rem',
+                  gap: '0.2rem',
                   justifyContent: 'center',
                   marginTop: '1rem',
                 }}
@@ -129,14 +129,14 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                       style={{
                         flex: '1 1 6%',
                         boxSizing: 'border-box',
-                        padding: '0.5rem 1rem 1rem 1rem',
+                        padding: '0.5rem 0.5rem 0.5rem 0.8rem',
                         border: '2px solid #f5f5f5',
                         borderRadius: '10px',
                         backgroundColor: '#ffffff',
                       }}
                     >
                       <p style={{fontWeight: 'bold', marginBottom: '0.1rem'}}>{new Date(forecast.dt * 1000).toLocaleTimeString([], {hour: '2-digit', hour12: false})}</p>
-                      <p style={{color: getFineDust(forecast.components.pm10).color, display: 'flex', alignItems: 'center', fontSize: '15px'}}>
+                      <p style={{color: getFineDust(forecast.components.pm10).color, display: 'flex', alignItems: 'center', fontSize: '14.6px', fontWeight: 'bold'}}>
                         {getFineDust(forecast.components.pm10).status}
                         <Icon
                           style={{
@@ -147,7 +147,7 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                           component={getFineDust(forecast.components.pm10).icon}  
                         />
                       </p>
-                      <p style={{color: getUltraFineDust(forecast.components.pm2_5).color, display: 'flex', alignItems: 'center', fontSize: '15px'}}>
+                      <p style={{color: getUltraFineDust(forecast.components.pm2_5).color, display: 'flex', alignItems: 'center', fontSize: '14.6px', fontWeight: 'bold'}}>
                         {getUltraFineDust(forecast.components.pm2_5).status}
                         <Icon
                           style={{
