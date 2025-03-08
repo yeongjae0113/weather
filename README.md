@@ -29,6 +29,28 @@ Weather 서비스는 실시간 날씨와 미세먼지 정보를 제공하는 Rea
 | <h4> 날씨 페이지 </h4> |
 | :-------------------------------------------: |
 | <img width="49%" src="https://github.com/user-attachments/assets/ae8a939e-4b1c-4f03-9653-7a9a77af99ae" alt="날씨 페이지 1" /> <img width="49%" src="https://github.com/user-attachments/assets/a36ae9ce-c27c-4fbf-a931-5de5f4a244aa" alt="날씨 페이지 2" /> |
-| <div align="left"> **검색 지역의 현재 날씨와 주간 예보 정보를 열람할 수 있습니다. .** </div> |
+| <div align="left"> **1. 검색 지역의 현재 날씨와 주간 예보 정보를 열람할 수 있습니다.** <br/> **2. 라인 그래프를 통해 사용자가 날씨 정보를 한 눈에 볼 수 있습니다.** </div> |
+
+<br />
+![스크린샷 2025-03-08 161601](https://github.com/user-attachments/assets/4b881cde-dab0-40b3-aaf7-60ba98747936)
+
+| <h4> 미세먼지 페이지 </h4> |
+| :-------------------------------------------: |
+| <img width="100%" alt="미세먼지 페이지" src="https://github.com/user-attachments/assets/4b881cde-dab0-40b3-aaf7-60ba98747936" /> |
+| <div align="left"> **1. 검색 지역의 현재 미세먼지 및 초미세먼지 정보와 주간 예보 정보를 열람할 수 있습니다.** <br/> **2. 도넛 그래프를 통해 사용자가 더 쉽게 정보를 얻을 수 있습니다** </div> |
+
+<br />
+
+| <h4> 기상 뉴스 페이지 </h4> |
+| :-------------------------------------------: |
+| <img width="100%" alt="기상 뉴스 페이지" src="https://github.com/user-attachments/assets/c2a1b1b6-206f-497f-b2da-e76a08645192" /> |
+| <div align="left"> **1. 한국, 중국, 해외 총 세 가지의 카테고리로 나누어 기상 관련 뉴스를 열람할 수 있습니다.** </div> |
+
+<br />
+
+| <h4> 대기질 뉴스 페이지 </h4> |
+| :-------------------------------------------: |
+| <img width="100%" alt="대기질 뉴스 페이지" src="https://github.com/user-attachments/assets/a07bca56-11f8-431c-b720-99eda328d928" /> |
+| <div align="left"> **1. 한국, 중국, 해외 총 세 가지의 카테고리로 나누어 대기질 관련 뉴스를 열람할 수 있습니다.** </div> |
 
 <br />
