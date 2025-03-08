@@ -2,7 +2,7 @@
 > **개발 기간 : 2025.01 ~ 2025.03**
 
 <div align="center">
-<!-- <img width="100" src="https://github.com/user-attachments/assets/f6be51d4-5653-4998-902f-11f191c7962c" alt="스크린샷"> -->
+<!-- <img width="100%" height="80%" src="https://github.com/user-attachments/assets/f6be51d4-5653-4998-902f-11f191c7962c" alt="스크린샷"> -->
 <img width="500" src="https://github.com/user-attachments/assets/f6be51d4-5653-4998-902f-11f191c7962c" alt="스크린샷">
 </div>
 <br/>
@@ -32,7 +32,6 @@ Weather 서비스는 실시간 날씨와 미세먼지 정보를 제공하는 Rea
 | <div align="left"> **1. 검색 지역의 현재 날씨와 주간 예보 정보를 열람할 수 있습니다.** <br/> **2. 라인 그래프를 통해 사용자가 날씨 정보를 한 눈에 볼 수 있습니다.** </div> |
 
 <br />
-![스크린샷 2025-03-08 161601](https://github.com/user-attachments/assets/4b881cde-dab0-40b3-aaf7-60ba98747936)
 
 | <h4> 미세먼지 페이지 </h4> |
 | :-------------------------------------------: |
