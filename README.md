@@ -2,7 +2,7 @@
 > **개발 기간 : 2025.01 ~ 2025.03**
 
 <div align="center">
-<!-- <img width="100%" height="80%" src="https://github.com/user-attachments/assets/f6be51d4-5653-4998-902f-11f191c7962c" alt="스크린샷"> -->
+<!-- <img width="100%" height="60%" src="https://github.com/user-attachments/assets/f6be51d4-5653-4998-902f-11f191c7962c" alt="스크린샷"> -->
 <img width="500" src="https://github.com/user-attachments/assets/f6be51d4-5653-4998-902f-11f191c7962c" alt="스크린샷">
 </div>
 <br/>
