@@ -8,8 +8,8 @@
 <br/>
 
 ## 🚀 프로젝트 소개
-Weather 서비스는 실시간 날씨와 미세먼지 정보를 제공하는 React 애플리케이션입니다. OpenWeatherMap API를 사용하여 날씨와 미세먼지 정보를 받아와 시각화합니다.
-OpenWeatherMap API 와 News API에서 받아온 다양한 기상 데이터를 구조화하여 분류하였습니다.
+Weather 서비스는 실시간 날씨와 미세먼지 정보를 제공하는 React 애플리케이션입니다. OpenWeatherMap API를 사용하여 날씨와 미세먼지 정보를 받아와 시각화합니다. <br/>
+OpenWeatherMap API 와 News API에서 받아온 다양한 기상 데이터를 구조화하여 분류하였습니다. <br/>
 이를 통해 사용자가 원하는 정보를 직관적으로 확인할 수 있도록 UI/UX를 개선하였습니다.
 <br/>
 
