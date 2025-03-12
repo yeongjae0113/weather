@@ -4,27 +4,24 @@ import { fetchNews } from "../../api/news/newsService"
 import Header from "../../layout/header/Header"
 import Footer from "../../layout/footer/Footer"
 import SelectedButton from "../../components/News/SelectedButton"
-import { Pagination } from "@mui/material"
+import CustomPagination from "../../components/News/CustomPagination"
 
 const AirQualityNews = () => {
   const [newsData, setNewsData] = useState<NewsResponse | null>(null)
   const [language, setLanguage] = useState<string>('ko')
   const [category, setCategory] = useState<string>('fineDust')
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const datas = newsData?.articles || []
   const articlesPage = 6
-
-  const getNews = async() => {
-    const data = await fetchNews(language, category)
-    console.log('대기질 뉴스 데이터: ', data)
-
-    setNewsData(data)
-  }
 
   useEffect(() => {
     getNews()
     console.log('category: ', category)
   }, [language, category])
+
+  const getNews = async() => {
+    const data = await fetchNews(language, category)
+    setNewsData(data)
+  }
 
   const handlePageChange = (_: any, value: number) => {  // _ 는 매개변수 => 값은 필요없지만 있어야만 하는 자리이기 때문에 _ 로 처리
     setCurrentPage(value);                                                      // value 는 
@@ -32,7 +29,7 @@ const AirQualityNews = () => {
 
   const startIndex = (currentPage - 1) * articlesPage;
   const endIndex = startIndex + articlesPage;
-  const currentArticles = newsData ? newsData.articles.slice(startIndex, endIndex) : [];
+  const currentArticles = newsData ? newsData.articles.slice(startIndex, endIndex) : []
 
   return (
     <>
@@ -44,7 +41,7 @@ const AirQualityNews = () => {
           setCategory={setCategory}
         />
 
-        {datas ? (
+        {newsData ? (
           <>
             <div
               style={{
@@ -126,17 +123,14 @@ const AirQualityNews = () => {
                     </div>
                   </div>
                 </div>
-              ))
-            }
-          </div>
-          <Pagination
-            count={Math.ceil((newsData?.articles.length || 0) / articlesPage)}
-            page={currentPage}
-            onChange={handlePageChange}
-            color="secondary"
-            size="large"
-            style={{ margin: '1rem auto', display: 'flex', justifyContent: 'center'}}
-          />
+              ))}
+            </div>
+            <CustomPagination
+              totalLength={newsData.articles.length}
+              articlesPage={articlesPage}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
           </>
         ) : (
           <p>뉴스 데이터를 불러오는 중입니다...</p>

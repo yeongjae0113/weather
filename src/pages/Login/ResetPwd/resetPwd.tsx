@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { confirmPasswordReset } from "firebase/auth"
 import { auth } from "../../../config/firebase"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { pwdValidation } from "../../../utils/ValidUtils"
 
 const ResetPwd = () => {
   const [newPwd, setNewPwd] = useState<string>('')
@@ -24,7 +25,6 @@ const ResetPwd = () => {
   }, [oobCode])
 
   const handleResetPassword = async () => {
-    const validation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
 
     var hasError = false
     setPwdError('')
@@ -40,7 +40,7 @@ const ResetPwd = () => {
       setPwdChkError('비밀번호가 일치하지 않습니다.')
       hasError = true
     }
-    if (!validation.test(newPwd)) {
+    if (!pwdValidation.test(newPwd)) {
       setPwdValid('비밀번호는 6~20자, 영문 대소문자, 숫자, 특수문자를 포함해야합니다.')
       hasError = true
     }

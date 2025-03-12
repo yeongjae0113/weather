@@ -6,7 +6,7 @@ import CurrentWeather from "../../components/Weather/CurrentWeather"
 import HourlyWeather from "../../components/Weather/HourlyWeather"
 import HourlyChart from "../../components/Chart/HourlyWeatherChart"
 import Footer from "../../layout/footer/Footer"
-import { useCity } from "../../context/CityContext"
+import { useCity } from "../../contexts/CityContext"
 
 const Weather = () => {
   const {city} = useCity()

@@ -1,10 +1,15 @@
 import { useEffect } from "react"
 
-const SelectedButton = ({language, setLanguage, setCategory} : {language: string, setLanguage: (lang: string) => void, setCategory: (cate: string) => void}) => {
-
-  const clickNews = ((language: string) => {
-    setLanguage(language)
-  })
+const SelectedButton = 
+({
+  language, 
+  setLanguage, 
+  setCategory
+} : {
+  language: string, 
+  setLanguage: (lang: string) => void,
+  setCategory: (cate: string) => void
+}) => {
 
   useEffect(() => {
     if (window.location.pathname === '/WeatherNews') {
@@ -13,6 +18,10 @@ const SelectedButton = ({language, setLanguage, setCategory} : {language: string
       setCategory('fineDust')
     }
   }, [setCategory])
+
+  const clickNews = ((language: string) => {
+    setLanguage(language)
+  })
 
   return (
     <>

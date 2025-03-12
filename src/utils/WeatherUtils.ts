@@ -1,12 +1,59 @@
 import { IconType } from 'react-icons';
 import { FaRegSmile, FaRegMeh, FaRegFrown, FaSadTear } from 'react-icons/fa';
+
+export const getRegion = () => {
+  navigator.geolocation.getCurrentPosition((position) => {
+    position.coords.latitude, position.coords.longitude
+  }, (error) => {
+    console.error('위치 정보 오류: ', error)
+  })
+}
+
+export function getWindDirection(deg: number): string {
+  if (deg >= 0 && deg < 45) return "북풍"
+  if (deg >= 45 && deg < 135) return "동풍"
+  if (deg >= 135 && deg < 225) return "남풍"
+  if (deg >= 225 && deg < 315) return "서풍"
+  return "North"
+}
+
+export const formatTime = (timestamp: number) => {
+  return new Date(timestamp).toLocaleTimeString('ko-Kr', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  })
+}
+
+export const formatTime2 = (timestamp: number) => {
+  return new Date(timestamp * 1000).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
+
+export const formatDate = (date: string) => {
+  return new Date(date).toLocaleDateString('ko-kr', {
+    month: 'long',
+    day: 'numeric',
+  })
+}
+
+export const formatDate2 = (date: string) => {
+  let formattedDate = date.replace(/\./, '.')
+  if (formattedDate.endsWith('.')) {
+    formattedDate = formattedDate.slice(0, -1)
+  }
+  return formattedDate
+}
+
 export const getFineDust = (pm10: number): {status: string, color: string, icon: IconType} => {
   if (pm10 <= 30) {
     return { 
       status: '좋음', 
       color: '#32A1FF', 
       icon: FaRegSmile
-    };
+    }
   } else if (pm10 <= 80) {
     return {
       status: '보통',

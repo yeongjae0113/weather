@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CurrentWeatherProps, Props } from "../../api/weather/weatherTypes";
 import WeatherMap from "./WeatherMap";
 import Favorites from "./Favorites";
+import { formatTime, getRegion, getWindDirection } from "../../utils/WeatherUtils";
 
 const CurrentWeather = ({ weatherData, city }: Props) => {
   const [isFavorites, setIsFavorites] = useState<boolean>(false)
@@ -20,35 +21,11 @@ const CurrentWeather = ({ weatherData, city }: Props) => {
   }
   
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      doSomething(position.coords.latitude, position.coords.longitude)
-    }, (error) => {
-      console.error('위치 정보 오류: ', error)
-    })
+    getRegion()
   }, [])
 
-  const doSomething = (latitude: number, longtitude: number) => {
-    console.log('위도: ', latitude, '경도: ', longtitude)
-  }
-
-  function getWindDirection(deg: number): string {
-    if (deg >= 0 && deg < 45) return "북풍"
-    if (deg >= 45 && deg < 135) return "동풍"
-    if (deg >= 135 && deg < 225) return "남풍"
-    if (deg >= 225 && deg < 315) return "서풍"
-    return "North";
-  }
-
-  const sunrise = new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString('ko-KR', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
-  })
-  const sunset = new Date(weatherData.sys.sunset * 1000).toLocaleTimeString('ko-KR', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
-  })
+  const sunrise = formatTime(weatherData.sys.sunrise * 1000)
+  const sunset = formatTime(weatherData.sys.sunset * 1000)
 
   const handleFavorites = () => {
     setIsFavorites(true)
@@ -115,7 +92,7 @@ const CurrentWeather = ({ weatherData, city }: Props) => {
           즐겨찾기 목록
         </button>
 
-        <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', flex: 0.9, alignItems: 'center'}}>
+        <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', flex: 0.88, alignItems: 'center'}}>
           <h2 style={{textAlign: 'center', margin: '0'}}>{city}</h2>
           <img
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0]?.icon}@2x.png`}

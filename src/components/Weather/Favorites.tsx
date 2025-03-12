@@ -1,7 +1,7 @@
 import { Dialog } from "@mui/material"
 import { useContext, useEffect, useState } from "react"
 import favorites, { FavoritesList } from "../../api/favorites/favorites"
-import { AuthContext } from "../../context/AuthContext"
+import { AuthContext } from "../../contexts/AuthContext"
 
 const Favorites = ({
   isDialog,
@@ -22,15 +22,15 @@ const Favorites = ({
         alert('로그인하세요.')
         return
       }
-      const getFavorites = async () => {
-        try {
-          const response = await favorites.favoritesList(uid)
-          setFavoritesData(response)
-        } catch (error) {
-          console.error
-        }
-      }
-      getFavorites()
+      // const getFavorites = async () => {
+      //   try {
+      //     const response = await favorites.favoritesList(uid)
+      //     setFavoritesData(response)
+      //   } catch (error) {
+      //     console.error
+      //   }
+      // }
+      // getFavorites()
     }
   }, [isDialog, uid])
 
@@ -67,7 +67,19 @@ const Favorites = ({
 
           </div>
           <div style={{position: 'absolute', top: '90%', right: '4%', marginBottom: '0.5rem'}}>
-            <button onClick={handleCloseDialog}>
+            <button
+              onClick={handleCloseDialog}
+              style={{
+                width: '100%', 
+                height: '2rem', 
+                cursor: 'pointer',
+                fontSize: '1rem', 
+                fontWeight: 'bold', 
+                border: 'none', 
+                borderRadius: '0.5rem', 
+                backgroundColor: 'rgb(216, 216, 216)' 
+              }}
+            >
               닫기
             </button>
           </div>

@@ -5,6 +5,7 @@ import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../../config/firebase";
+import { emailValidation } from "../../../utils/ValidUtils";
 
 const FindPwd = () => {
   const [email, setEmail] = useState<string>('')
@@ -19,8 +20,7 @@ const FindPwd = () => {
       setEmailError('이메일을 입력해주세요.')
       return
     }
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailPattern.test(email)) {
+    if (!emailValidation.test(email)) {
       setEmailValid('올바른 이메일 주소를 입력해주세요.')
       return
     }

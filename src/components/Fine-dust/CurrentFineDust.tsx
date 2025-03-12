@@ -1,7 +1,7 @@
 import { Icon } from "@mui/material"
 import { getCo, getFineDust, getNo2, getO3, getSo2, getUltraFineDust } from "../../utils/WeatherUtils"
 import FineDustChart from "../Chart/FineDustChart"
-import UltraFineDustChart from "../../components/Fine-dust/UltraFineDustChart"
+import UltraFineDustChart from "../Chart/UltraFineDustChart"
 import { Icons, Pont1, Pont2, PontDiv } from "../../pages/Fine-dust/style"
 import { FineDustResponse } from "../../api/fine-dust/fineDustType"
 import { useEffect, useState } from "react"
@@ -17,7 +17,6 @@ const CurrentFineDust = ({ fineDustData, forecastData }: FineDustResponse) => {
     afternoon: {pm10: 0, pm2_5: 0}
   })
 
-  console.log('데이터: ', currentData)
   useEffect(() => {
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
@@ -27,9 +26,6 @@ const CurrentFineDust = ({ fineDustData, forecastData }: FineDustResponse) => {
     tomorrow.setHours(23, 59, 59, 999)
     const endTomorrow = Math.floor(tomorrow.getTime() / 1000)
 
-    console.log('내일 시작 시간: ', startTomorrow)
-    console.log('내일 마지막 시간: ', endTomorrow)
-
     const tomorrowData = forecastData.list.filter((forecast) => {
       const forecastDate = new Date(forecast.dt * 1000) 
       const forecastDated = Math.floor(forecastDate.getTime() / 1000) 
@@ -37,19 +33,13 @@ const CurrentFineDust = ({ fineDustData, forecastData }: FineDustResponse) => {
       return forecastDated >= startTomorrow && forecastDated <= endTomorrow
     })
 
-    console.log('내일 데이터: ', tomorrowData)
-
     const morningData = tomorrowData.filter((forecastData) => new Date(forecastData.dt * 1000).getHours() < 12)
     const afternoonData = tomorrowData.filter((forecastData) => new Date(forecastData.dt * 1000).getHours() >= 12)
-    console.log('오전 데이터: ', morningData)
-    console.log('오후 데이터: ', afternoonData)
 
     const calculateAverage = (data: any[]) => {
       const totalPm10 = data.reduce((acc, forecast) => acc + forecast.components.pm10, 0)
       const totalPm2_5 = data.reduce((acc, forecast) => acc + forecast.components.pm2_5, 0)
       const totalCount = data.length
-      console.log('미세먼지 합: ', totalPm10)
-      console.log('초미세먼지 합: ', totalPm2_5)
 
       return {
         pm10: totalPm10 / totalCount,
@@ -69,9 +59,6 @@ const CurrentFineDust = ({ fineDustData, forecastData }: FineDustResponse) => {
         pm2_5: Math.floor(afternoonAverage.pm2_5)
       }
     })
-    console.log('오전 평균: ', morningAverage)
-    console.log('오후 평균: ', afternoonAverage)
-
   }, [forecastData])
 
   
@@ -175,7 +162,8 @@ const CurrentFineDust = ({ fineDustData, forecastData }: FineDustResponse) => {
             textAlign: 'center', 
             border: '2px solid #cccccc',
             borderRadius: '10px', 
-        }}>
+          }}
+        >
           <div style={{display: 'flex', alignItems: 'center', width: '100%', height: '23%'}}>
             <p style={{flex: 1, color: '#555555', fontWeight: 'bold'}}>내일</p>
             <p style={{flex: 2, color: '#555555', fontWeight: 'bold'}}>미세먼지</p>
@@ -239,4 +227,4 @@ const CurrentFineDust = ({ fineDustData, forecastData }: FineDustResponse) => {
   )
 }
 
-export default CurrentFineDust;
+export default CurrentFineDust

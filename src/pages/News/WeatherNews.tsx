@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import { fetchNews } from "../../api/news/newsService"
 import { NewsResponse } from "../../api/news/newsType"
 import Header from "../../layout/header/Header"
-import { Pagination } from "@mui/material"
 import Footer from "../../layout/footer/Footer"
 import SelectedButton from "../../components/News/SelectedButton"
+import CustomPagination from "../../components/News/CustomPagination"
 
 const WeatherNews = () => {
   const [newsData, setNewsData] = useState<NewsResponse | null>(null)
@@ -13,6 +13,11 @@ const WeatherNews = () => {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const articlesPage = 6
   
+  useEffect(() => {
+    getNews()
+    console.log('category: ', category)
+  }, [language, category])
+
   const getNews = async () => {
     try {
       const data = await fetchNews(language, category)
@@ -25,11 +30,6 @@ const WeatherNews = () => {
       console.error(`${language} API 호출 실패: `, error)
     }
   }
-
-  useEffect(() => {
-    getNews()
-    console.log('category: ', category)
-  }, [language, category])
   
   const handlePageChange = (_: any, value: number) => {  // _ 는 매개변수 => 값은 필요없지만 있어야만 하는 자리이기 때문에 _ 로 처리
     setCurrentPage(value);                                                      // value 는 
@@ -37,7 +37,7 @@ const WeatherNews = () => {
 
   const startIndex = (currentPage - 1) * articlesPage;
   const endIndex = startIndex + articlesPage;
-  const currentArticles = newsData ? newsData.articles.slice(startIndex, endIndex) : [];
+  const currentArticles = newsData ? newsData.articles.slice(startIndex, endIndex) : []
   
   return (
     <div>
@@ -133,13 +133,11 @@ const WeatherNews = () => {
                 </div>
               ))}
             </div>
-            <Pagination
-              count={Math.ceil((newsData?.articles.length || 0) / articlesPage)}
-              page={currentPage}
-              onChange={handlePageChange}
-              color='secondary'
-              size='large'
-              style={{margin: '1rem auto', display: 'flex', justifyContent: 'center'}}
+            <CustomPagination
+              totalLength={newsData.articles.length}
+              articlesPage={articlesPage}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
             />
           </>
         ) : (

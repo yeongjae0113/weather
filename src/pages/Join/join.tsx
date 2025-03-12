@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth"
 import { auth } from "../../config/firebase"
+import { emailValidation, pwdValidation } from "../../utils/ValidUtils"
 
 const Join = () => {
   const [email, setEmail] = useState<string>('')
@@ -21,8 +22,6 @@ const Join = () => {
   const movePage = useNavigate()
 
   const handleSendCertCode = async () => {
-    const validation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
-    const emailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
     var hasError = false
     setEmailError('')
@@ -45,7 +44,7 @@ const Join = () => {
       setPwdError('비밀번호를 입력하세요.')
       hasError = true
     }
-    if (!validation.test(pwd)) {
+    if (!pwdValidation.test(pwd)) {
       setPwdValid('비밀번호는 6~20자, 영문 대소문자, 숫자, 특수문자를 포함해야합니다.')
       hasError = true
     }

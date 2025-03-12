@@ -1,14 +1,12 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import Footer from "../../layout/footer/Footer"
 import Header from "../../layout/header/Header"
-import { AuthContext } from "../../context/AuthContext"
-import { deleteUser, getAuth } from "firebase/auth"
+import { deleteUser, getAuth, signOut } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import { TextField } from "@mui/material"
 
 const MyPage = () => {
   const [deleteText, setDeleteText] = useState<string>('')
-  const user = useContext(AuthContext)
   const auth = getAuth()
   const movePage = useNavigate()
 
@@ -21,12 +19,12 @@ const MyPage = () => {
     try {
       confirm('탈퇴하시겠습니까?')
       await deleteUser(auth.currentUser)
+      await signOut(auth)
       movePage('/')
     } catch (error) {
       console.error
     }
   }
-  
   
   return (
     <>
@@ -34,7 +32,7 @@ const MyPage = () => {
       <div style={{width: '80%', height: '72vh', margin: '0 auto'}}>
         <h2 style={{textAlign: 'center', marginBottom: '10rem'}}>마이페이지</h2>
         <div style={{display: 'flex', justifyContent: 'center'}}> 
-          <div style={{width: '30%', fontWeight: 'bold', marginBottom: '1rem'}}>회원탈퇴를 원하시면 "삭제"를 입력하세요.</div>
+          <div style={{width: '30%', fontWeight: 'bold', marginBottom: '1rem'}}>회원탈퇴를 원하시면 "회원탈퇴"를 입력하세요.</div>
         </div>
         <div style={{display: 'flex', justifyContent: 'center', marginBottom: '2rem'}}>
           <TextField 

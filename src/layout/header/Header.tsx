@@ -3,34 +3,39 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect, useContext } from "react"
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
-import { useCity } from "../../context/CityContext";
-import { AuthContext } from "../../context/AuthContext";
+import { useCity } from "../../contexts/CityContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 
 const Header = () => {
   const movePage = useNavigate()
-  const {setCity} = useCity()
+  const { setCity } = useCity()
   const [selectedPage, setSelectedPage] = useState<string>('home')
+  const [isDropdown, setIsDropdown] = useState<boolean>(false)
   const userDetail = useContext(AuthContext)
-  console.log('Header = userDetail: ', userDetail)
 
   useEffect(() => {
     if (window.location.pathname === '/') {
       setSelectedPage('home')
-    } if (window.location.pathname === '/fineDust') {
+    } else if (window.location.pathname === '/fineDust') {
       setSelectedPage('fineDust')
-    } if (window.location.pathname === '/weatherNews') {
+    } else if (window.location.pathname === '/weatherNews') {
       setSelectedPage('weatherNews') 
-    } if (window.location.pathname === '/airQualityNews') {
+    } else if (window.location.pathname === '/airQualityNews') {
       setSelectedPage('airQualityNews') 
-    } if (window.location.pathname === '/kWeather') {
+    } else if (window.location.pathname === '/kWeather') {
       setSelectedPage('kWeather')
-    } if (window.location.pathname === '/login') {
+    } else if (window.location.pathname === '/login') {
       setSelectedPage('login')
-    } if (window.location.pathname === '/join') {
+    } else if (window.location.pathname === '/join') {
       setSelectedPage('join')
     }
-  }, [window.location.pathname, userDetail])
+  }, [window.location.pathname])
+
+  const toggleDropdown = () => {
+    setIsDropdown(prev => !prev)
+    console.log(isDropdown)
+  }
 
   const handleNavigation = (page: string, path: string) => {
     setSelectedPage(page)
@@ -48,7 +53,7 @@ const Header = () => {
         alert('로그아웃 되었습니다.')
         movePage('/')
       } catch (error) {
-        console.error
+        console.error('로그아웃 오류:', error)
       }
     }
   }
@@ -75,15 +80,23 @@ const Header = () => {
               alt="날씨 아이콘"
               style={{ width: '40px'}}
             />
-            <div style={{fontWeight: 'bold', fontSize: '1.4rem', textAlign:'center', alignContent: 'center'}}>Weather</div>
+            <div 
+              style={{
+                fontWeight: 'bold', 
+                fontSize: '1.4rem', 
+                textAlign:'center', 
+                alignContent: 'center'
+              }}
+            >
+              Weather
+            </div>
           </div>
           <div 
             onClick={() => handleNavigation('home', '/')}
             style={{
               cursor: 'pointer',
               fontWeight: 'bold',
-              fontSize: '1.1rem',
-              borderBottom: selectedPage === 'home' ? '2px solid black' : 'none',
+              fontSize: '1.2rem',
               color: selectedPage === 'home' ? 'black' : '#888', 
             }}
           >
@@ -94,8 +107,7 @@ const Header = () => {
             style={{
               cursor: 'pointer',
               fontWeight: 'bold',
-              fontSize: '1.1rem',
-              borderBottom: selectedPage === 'fineDust' ? '2px solid black' : 'none',
+              fontSize: '1.2rem',
               color: selectedPage === 'fineDust' ? 'black' : '#888'
             }}
           >
@@ -106,8 +118,7 @@ const Header = () => {
             style={{
               cursor: 'pointer',
               fontWeight: 'bold',
-              fontSize: '1.1rem',
-              borderBottom: selectedPage === 'weatherNews' ? '2px solid black' : 'none',
+              fontSize: '1.2rem',
               color: selectedPage === 'weatherNews' ? 'black' : '#888', 
             }}
           >
@@ -118,8 +129,7 @@ const Header = () => {
             style={{
               cursor: 'pointer',
               fontWeight: 'bold',
-              fontSize: '1.1rem',
-              borderBottom: selectedPage === 'airQualityNews' ? '2px solid black' : 'none',
+              fontSize: '1.2rem',
               color: selectedPage === 'airQualityNews' ? 'black' : '#888'
             }}
           >
@@ -127,37 +137,33 @@ const Header = () => {
           </div>
         </div>
 
-
-        <div style={{display: 'flex', alignItems: 'center'}}>
-          <div style={{marginRight: '1rem'}}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ marginRight: '1rem' }}>
             <CityInput setCity={setCity} />
           </div>
+
           {!userDetail?.user ? (
             <>
               <div
                 onClick={() => handleNavigation('login', '/login')}
                 style={{
                   marginLeft: '2rem',
-                  alignContent: 'center',
                   cursor: 'pointer',
                   fontWeight: 'bold',
-                  fontSize: '1.1rem',
-                  borderBottom: selectedPage === 'login' ? '2px solid black' : 'none',
-                  color: selectedPage === 'login' ? 'black' : '#888'
+                  fontSize: '1.2rem',
+                  color: selectedPage === 'login' ? 'black' : '#888',
                 }}
               >
                 로그인
               </div>
               <div
-                onClick={() => handleNavigation('login', '/join')}
+                onClick={() => handleNavigation('join', '/join')}
                 style={{
                   marginLeft: '2rem',
-                  alignContent: 'center',
                   cursor: 'pointer',
                   fontWeight: 'bold',
-                  fontSize: '1.1rem',
-                  borderBottom: selectedPage === 'join' ? '2px solid black' : 'none',
-                  color: selectedPage === 'join' ? 'black' : '#888'
+                  fontSize: '1.2rem',
+                  color: selectedPage === 'join' ? 'black' : '#888',
                 }}
               >
                 회원가입
@@ -165,43 +171,70 @@ const Header = () => {
             </>
           ) : (
             <>
-              <div
-                onClick={handleMyPage}
+              <div 
+                onClick={toggleDropdown} 
                 style={{
                   height: '1.5rem',
                   fontWeight: 'bold',
-                  alignContent: 'center',
-                  backgroundColor: '#888',
+                  backgroundColor: 'rgb(169 169 169)',
                   padding: '0.5rem',
                   borderRadius: '0.5rem',
                   color: 'white',
                   cursor: 'pointer',
+                  position: 'relative',
                 }}
               >
                 {userDetail.user?.email}
               </div>
-              <div
-                onClick={handleLogout}
-                style={{
-                  marginLeft: '2rem',
-                  alignContent: 'center',
-                  cursor: 'pointer',
-                  fontWeight: 'bold',
-                  fontSize: '1.1rem',
-                  color: '#888'
-                }}
-              >
-                로그아웃
-              </div>
-            </>
-          )
-        }
-        </div>
 
+              {isDropdown && (
+                <div 
+                  style={{
+                    position: 'absolute',
+                    top: '5.2%',
+                    right: '2.9%',
+                    backgroundColor: 'rgb(169 169 169)',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                    borderRadius: '0 0 0.5rem 0.5rem',
+                    width: '10rem',
+                    zIndex: 1000,
+                  }}
+                >
+                  <div 
+                    onClick={handleMyPage} 
+                    style={{
+                      padding: '0.5rem',
+                      cursor: 'pointer',
+                      borderBottom: '1px solid #ddd',
+                      textAlign: 'center',
+                      color: 'white',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    마이페이지
+                  </div>
+                  <div 
+                    onClick={handleLogout} 
+                    style={{
+                      padding: '0.5rem',
+                      cursor: 'pointer',
+                      textAlign: 'center',
+                      color: 'white',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    로그아웃
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
+
       <div style={{ width: '100%', borderBottom: '1px solid #ddd' }} />
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

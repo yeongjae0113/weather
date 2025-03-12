@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { HourlyProps, HourlyWeatherProps } from "../../api/weather/weatherTypes";
+import { formatDate, formatDate2, formatTime2 } from "../../utils/WeatherUtils";
 
 const HourlyWeather = ({ hourlyData, city }: HourlyProps) => {
   const [selectedDate, setSelectedDate] = useState<string>('')
-  const [groupedDates, setGroupedDates] = useState<{ date: string; hours: any[] }[]>([])
+  const [groupedDates, setGroupedDates] = useState<{ date: string, hours: any[] }[]>([])
   
   useEffect(() => {
     if (!hourlyData || !hourlyData.list) return
     
-    const grouped = hourlyData.list.reduce<{ date: string; hours: any[] }[]>((acc, hour) => {
-      const date = new Date(hour.dt * 1000).toLocaleDateString()
+    const grouped = hourlyData.list.reduce<{ date: string, hours: any[] }[]>((acc, hour) => {
+      const date = new Date(hour.dt * 1000).toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      })
+      console.log(date)
       const existingGroup = acc.find((group) => group.date === date)
 
       if (existingGroup) {
@@ -30,29 +36,21 @@ const HourlyWeather = ({ hourlyData, city }: HourlyProps) => {
     setSelectedDate(date)
   }
 
-  const formatDate = (date: string) => {
-    let formatDate = new Date(date).toLocaleDateString('ko-KR', {
-      month: 'long',
-      day: 'numeric'
-    })
-    return formatDate
-  }
-
-  const formatDate2 = (date: string) => {
-    let formattedDate = date.replace(/\./g, '/')
-    formattedDate = formattedDate.replace(/\//g, ' /')
-    if (formattedDate.endsWith('/')) {
-      formattedDate = formattedDate.slice(0, -1)
-    }
-    return formattedDate
-  }
+  // const formatDate2 = (date: string) => {
+  //   let formattedDate = date.replace(/\./g, '/')
+  //   formattedDate = formattedDate.replace(/\//g, ' /')
+  //   if (formattedDate.endsWith('/')) {
+  //     formattedDate = formattedDate.slice(0, -1)
+  //   }
+  //   return formattedDate
+  // }
 
   if (!hourlyData || !hourlyData.list || hourlyData.list.length === 0) return null
 
   return (
     <div>
       <h2 style={{marginTop: '2rem'}}>{city} 주간 예보</h2>
-      <div style={{display: 'flex', gap: '1rem'}}>
+      <div style={{display: 'flex', gap: '0.9rem'}}>
         {groupedDates.map((dateGroup) => (
           <button
             key={dateGroup.date}
@@ -64,7 +62,7 @@ const HourlyWeather = ({ hourlyData, city }: HourlyProps) => {
               border: 'none',
               borderRadius: '5px',
               cursor: 'pointer',
-              backgroundColor: selectedDate === dateGroup.date ? '#5f5f5f' : '#f5f5f5',
+              backgroundColor: selectedDate === dateGroup.date ? 'black' : 'rgb(215 215 215)',
               color: selectedDate === dateGroup.date ? 'white' : 'black',
             }}
           >
@@ -93,25 +91,23 @@ const HourlyWeather = ({ hourlyData, city }: HourlyProps) => {
                       style={{
                         marginBottom: '1rem',
                         padding: '1rem',
-                        border: '2px solid #f5f5f5',
+                        border: '2px solid rgb(215 215 215)',
                         borderRadius: '10px',
                         flex: '1 1 7%',
                         boxSizing: 'border-box',
                       }}
                     >
-                      <p>{hour.weather[0]?.description}</p>
+                      <p>{hour.weather[0]?.description}{console.log(hour.weather)}</p>
+                      
                       <img
                         src={`https://openweathermap.org/img/wn/${hour.weather[0]?.icon}.png`}
                         alt='weather icon'
                       />
                       <p>
-                        {new Date(hour.dt * 1000).toLocaleTimeString([], {
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        })}
+                        {formatTime2(hour.dt)}
                       </p>
                       <p style={{color: 'black'}}>
-                        기온:{" "}
+                        기온:&nbsp;
                         <span
                           style={{
                             color: hour.main.temp > 0 ? '#DC0100' : '#2A74F8',

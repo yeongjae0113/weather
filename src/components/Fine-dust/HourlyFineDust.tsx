@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { HourlyFineDustResponse } from "../../api/fine-dust/fineDustType"
-import { getFineDust, getUltraFineDust } from "../../utils/WeatherUtils"
+import { formatDate2, getFineDust, getUltraFineDust } from "../../utils/WeatherUtils"
 import { Icon } from "@mui/material"
-import { useCity } from "../../context/CityContext";
+import { useCity } from "../../contexts/CityContext";
 
 const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
   const {city} = useCity()
@@ -22,12 +22,11 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
       }
       return acc
     }, {})
-    setGroupedData(grouped);
-    
+
+    setGroupedData(grouped)
     if (Object.keys(grouped).length > 0) {
-      setSelectedDate(Object.keys(grouped)[0])  // 첫 번째 날짜로 초기화
+      setSelectedDate(Object.keys(grouped)[0])
     }
-    console.log('asjkldh: ', forecastData)
   }, [forecastData])
   
   return (
@@ -39,6 +38,7 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
             {Object.keys(groupedData).map((date, index) => (
               <button
                 key={index}
+                onClick={() => setSelectedDate(date)}
                 style={{
                   fontSize: '0.9rem',
                   fontWeight: "bold",
@@ -46,13 +46,11 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                   border: "none",
                   borderRadius: "5px",
                   cursor: "pointer",
-                  backgroundColor: selectedDate === date ? "black" : "#f5f5f5",
+                  backgroundColor: selectedDate === date ? "black" : "rgb(215 215 215)",
                   color: selectedDate === date ? "white" : "black",
-
                 }}
-                onClick={() => setSelectedDate(date)}
               >
-                {date}
+                {formatDate2(date)}
               </button>
             ))}
           </div>
@@ -77,7 +75,7 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                         flex: '1 1 6%',
                         boxSizing: 'border-box',
                         padding: '0.5rem 0.5rem 0.5rem 0.8rem',
-                        border: '2px solid #f5f5f5',
+                        border: '2px solid rgb(215 215 215)',
                         borderRadius: '10px',
                         backgroundColor: '#ffffff'
                       }}
@@ -130,7 +128,7 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                         flex: '1 1 6%',
                         boxSizing: 'border-box',
                         padding: '0.5rem 0.5rem 0.5rem 0.8rem',
-                        border: '2px solid #f5f5f5',
+                        border: '2px solid rgb(215 215 215)',
                         borderRadius: '10px',
                         backgroundColor: '#ffffff',
                       }}

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchHourlyData } from "../../api/weather/weatherService";
 import { transformHourlyData } from "../../api/weather/chart";
 import { Line } from "react-chartjs-2";
-import { useCity } from "../../context/CityContext";
+import { useCity } from "../../contexts/CityContext";
 
 ChartJS.register(...registerables)
 
