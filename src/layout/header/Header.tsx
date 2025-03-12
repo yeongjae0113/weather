@@ -1,31 +1,56 @@
-import { useCity } from "../../context/CityContext"
 import CityInput from "../../components/Weather/CityInput"
 import { useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { signOut } from "firebase/auth";
+import { auth } from "../../config/firebase";
+import { useCity } from "../../context/CityContext";
+import { AuthContext } from "../../context/AuthContext";
+
 
 const Header = () => {
   const movePage = useNavigate()
   const {setCity} = useCity()
-  
   const [selectedPage, setSelectedPage] = useState<string>('home')
+  const userDetail = useContext(AuthContext)
+  console.log('Header = userDetail: ', userDetail)
 
   useEffect(() => {
     if (window.location.pathname === '/') {
       setSelectedPage('home')
     } if (window.location.pathname === '/fineDust') {
-      setSelectedPage('finrDust')
+      setSelectedPage('fineDust')
     } if (window.location.pathname === '/weatherNews') {
       setSelectedPage('weatherNews') 
     } if (window.location.pathname === '/airQualityNews') {
       setSelectedPage('airQualityNews') 
     } if (window.location.pathname === '/kWeather') {
       setSelectedPage('kWeather')
+    } if (window.location.pathname === '/login') {
+      setSelectedPage('login')
+    } if (window.location.pathname === '/join') {
+      setSelectedPage('join')
     }
-  }, [window.location.pathname])
+  }, [window.location.pathname, userDetail])
 
   const handleNavigation = (page: string, path: string) => {
     setSelectedPage(page)
     movePage(path)
+  }
+
+  const handleMyPage = () => {
+    movePage('/mypage')
+  }
+
+  const handleLogout = async () => {
+    if (confirm('로그아웃 하시겠습니까?')) {
+      try {
+        await signOut(auth)
+        alert('로그아웃 되었습니다.')
+        movePage('/')
+      } catch (error) {
+        console.error
+      }
+    }
   }
 
   return (
@@ -101,8 +126,78 @@ const Header = () => {
             대기질뉴스
           </div>
         </div>
-      
-        <CityInput setCity={setCity} />
+
+
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <div style={{marginRight: '1rem'}}>
+            <CityInput setCity={setCity} />
+          </div>
+          {!userDetail?.user ? (
+            <>
+              <div
+                onClick={() => handleNavigation('login', '/login')}
+                style={{
+                  marginLeft: '2rem',
+                  alignContent: 'center',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  fontSize: '1.1rem',
+                  borderBottom: selectedPage === 'login' ? '2px solid black' : 'none',
+                  color: selectedPage === 'login' ? 'black' : '#888'
+                }}
+              >
+                로그인
+              </div>
+              <div
+                onClick={() => handleNavigation('login', '/join')}
+                style={{
+                  marginLeft: '2rem',
+                  alignContent: 'center',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  fontSize: '1.1rem',
+                  borderBottom: selectedPage === 'join' ? '2px solid black' : 'none',
+                  color: selectedPage === 'join' ? 'black' : '#888'
+                }}
+              >
+                회원가입
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                onClick={handleMyPage}
+                style={{
+                  height: '1.5rem',
+                  fontWeight: 'bold',
+                  alignContent: 'center',
+                  backgroundColor: '#888',
+                  padding: '0.5rem',
+                  borderRadius: '0.5rem',
+                  color: 'white',
+                  cursor: 'pointer',
+                }}
+              >
+                {userDetail.user?.email}
+              </div>
+              <div
+                onClick={handleLogout}
+                style={{
+                  marginLeft: '2rem',
+                  alignContent: 'center',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  fontSize: '1.1rem',
+                  color: '#888'
+                }}
+              >
+                로그아웃
+              </div>
+            </>
+          )
+        }
+        </div>
+
       </div>
       <div style={{ width: '100%', borderBottom: '1px solid #ddd' }} />
     </>

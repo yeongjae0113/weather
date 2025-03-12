@@ -21,6 +21,7 @@ const CityInput = ({ setCity }: { setCity: any }) => {
             input: {
               style: {
                 width: '15rem',
+                height: '2.5rem',
                 borderRadius: "0.75rem",
                 backgroundColor: "rgba(255, 255, 255, 0.10)",
                 fontWeight: 'bold'

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 
 const CurrentFineDust = ({ fineDustData, forecastData }: FineDustResponse) => {
   const currentData = fineDustData.list[0].components
+  console.log('커런트데이터: ', currentData)
   const [averageDust, setAverageDust] = useState<{ 
     morning: {pm10: number, pm2_5: number}, 
     afternoon: {pm10: number, pm2_5: number}
@@ -143,25 +144,25 @@ const CurrentFineDust = ({ fineDustData, forecastData }: FineDustResponse) => {
         <div style={{display: 'flex', flexWrap: 'wrap', width: '40%', justifyContent: 'center', marginRight: '2rem'}}>
           <PontDiv style={{ width: '22%', height: '1rem', marginBottom: '0.2rem', marginLeft: '2rem'}}>
             <Pont1>O3</Pont1>
-            <Pont2>
+            <Pont2 style={{whiteSpace: 'nowrap'}}>
               {getO3(fineDustData.list[0].components.o3).value} {getO3(fineDustData.list[0].components.o3).status}
             </Pont2>
           </PontDiv>
           <PontDiv style={{ width: '22%', height: '1rem', marginBottom: '0.2rem', marginLeft: '1rem'}}>
             <Pont1>CO</Pont1>
-            <Pont2>
+            <Pont2 style={{whiteSpace: 'nowrap'}}>
               {getCo(fineDustData.list[0].components.co).value} {getCo(fineDustData.list[0].components.co).status}
             </Pont2>
           </PontDiv>
           <PontDiv style={{ width: '22%', height: '1rem', marginBottom: '0.2rem', marginLeft: '2rem'}}>
             <Pont1>SO2</Pont1>
-            <Pont2>
+            <Pont2 style={{whiteSpace: 'nowrap'}}>
               {getSo2(fineDustData.list[0].components.so2).value} {getSo2(fineDustData.list[0].components.so2).status}
             </Pont2>
           </PontDiv>
           <PontDiv style={{ width: '22%', height: '1rem', marginBottom: '0.2rem', marginLeft: '1rem'}}>
             <Pont1>NO2</Pont1>
-            <Pont2>
+            <Pont2 style={{whiteSpace: 'nowrap'}}>
               {getNo2(fineDustData.list[0].components.no2).value} {getNo2(fineDustData.list[0].components.no2).status}
             </Pont2>
           </PontDiv>

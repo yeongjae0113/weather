@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { weatherConfig } from '../../config/ApiConfig'
+import { weatherConfig } from '../../config/apiConfig'
 import { HourlyResponse, WeatherMaps, WeatherResponse } from './weatherTypes'
 
 const cityMap: {[key: string]: string} = {
@@ -83,9 +83,11 @@ export const fetchWeatherData = async (city: string): Promise<WeatherResponse> =
 
 export const fetchHourlyData = async (city: string): Promise<HourlyResponse> => {
   try {
+    const formatCity = cityMap[city] || city
     const response = await axios.get<HourlyResponse>(
-      `/weather-api/data/2.5/forecast?q=${city}&appid=${weatherConfig.apiKey}&lang=kr&units=metric`
+      `/weather-api/data/2.5/forecast?q=${formatCity}&appid=${weatherConfig.apiKey}&lang=kr&units=metric`
     )
+    console.log('날씨 데이터: ', response.data) 
     return response.data
   } catch (error) {
     throw new Error("시간별 날씨 데이터를 가져오지 못함")

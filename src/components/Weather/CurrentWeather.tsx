@@ -1,8 +1,12 @@
-import { useEffect } from "react";
-import { CurrentWeatherProps } from "../../api/weather/weatherTypes";
+import { useEffect, useState } from "react";
+import { CurrentWeatherProps, Props } from "../../api/weather/weatherTypes";
 import WeatherMap from "./WeatherMap";
+import Favorites from "./Favorites";
 
-const CurrentWeather = ({ weatherData }: CurrentWeatherProps) => {
+const CurrentWeather = ({ weatherData, city }: Props) => {
+  const [isFavorites, setIsFavorites] = useState<boolean>(false)
+  const [isDialog, setIsDialog] = useState<boolean>(false)
+
   const styles = {
     pont: {
       width: '50%',
@@ -45,19 +49,86 @@ const CurrentWeather = ({ weatherData }: CurrentWeatherProps) => {
     minute: '2-digit',
     hour12: false
   })
-  console.log('일출: ', sunrise)
-  console.log('일몰: ', sunset)
+
+  const handleFavorites = () => {
+    setIsFavorites(true)
+    alert('즐겨찾기 등록 완료')
+  }
+
+  const handleNotFavorites = () => {
+    setIsFavorites(false)
+    alert('즐겨찾기 취소')
+  }
+
+  const handleOpenDialog = () => {
+    setIsDialog(true)
+  }
+
+  const handleCloseDialog = () => {
+    setIsDialog(false)
+    console.log(isDialog)
+  }
 
   return (
     <div style={{alignContent: 'center'}}>
-      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-        <h2 style={{textAlign: 'center'}}>{weatherData.name}</h2>
-        <img
-          src={`https://openweathermap.org/img/wn/${weatherData.weather[0]?.icon}.png`}
-          alt="weather icon"
-          style={{width: '5%', marginTop: '-1.7rem'}}
-        />
+      <div style={{display: 'flex', alignItems: 'center', marginTop: '2rem'}}>
+
+        {!isFavorites ? (
+          <button
+            onClick={handleFavorites}
+            style={{
+              width: '4rem',
+              border: 'none',
+              background: 'none',
+            }}
+          >
+            <img src="/img/star2.png" alt="즐겨찾기 등록안됨" 
+              style={{width: '2rem', height: '3rem', objectFit: 'contain'}}
+            />
+          </button>
+          ) : (
+          <button
+            onClick={handleNotFavorites}
+            style={{
+              width: '4rem',
+              border: 'none',
+              background: 'none',
+            }}
+          >
+            <img src="/img/star.png" alt="즐겨찾기 등록됨" 
+              style={{width: '3rem', height: '3rem', objectFit: 'contain'}}
+            />
+          </button>
+        )}
+
+        <button 
+          onClick={handleOpenDialog}
+          style={{
+            border: 'none',
+            borderRadius: '0.3rem',
+            // background: 'none',
+            fontWeight: 'bold',
+            padding: '0.4rem',
+            cursor: 'pointer',
+          }}
+        >
+          즐겨찾기 목록
+        </button>
+
+        <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', flex: 0.9, alignItems: 'center'}}>
+          <h2 style={{textAlign: 'center', margin: '0'}}>{city}</h2>
+          <img
+            src={`https://openweathermap.org/img/wn/${weatherData.weather[0]?.icon}@2x.png`}
+            alt="weather icon"
+            style={{width: '7%'}}
+          />
+        </div>
       </div>
+      <Favorites 
+        isDialog={isDialog}
+        handleCloseDialog={handleCloseDialog}
+      />
+      
       <div style={{display: 'flex', justifyContent: 'center', width: '100%', borderBottom: '2px solid #d9d9d9'}}>
         <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
           <div style={{flex: '1', flexDirection: 'column'}}>
@@ -112,7 +183,7 @@ const CurrentWeather = ({ weatherData }: CurrentWeatherProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CurrentWeather;
+export default CurrentWeather

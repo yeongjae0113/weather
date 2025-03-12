@@ -1,5 +1,5 @@
 import axios from "axios";
-import { newsConfig } from "../../config/ApiConfig";
+import { newsConfig } from "../../config/apiConfig";
 import { NewsResponse } from "./newsType";
 
 export const queryMap: Record<string, Record<string, string>> = {

@@ -1,19 +1,19 @@
 import { IconType } from 'react-icons';
-import { FaRegSmile, FaRegMeh, FaRegFrown, FaSadTear, FaSadCry } from 'react-icons/fa';
+import { FaRegSmile, FaRegMeh, FaRegFrown, FaSadTear } from 'react-icons/fa';
 export const getFineDust = (pm10: number): {status: string, color: string, icon: IconType} => {
-  if (pm10 <= 15) {
+  if (pm10 <= 30) {
     return { 
       status: '좋음', 
       color: '#32A1FF', 
       icon: FaRegSmile
     };
-  } else if (pm10 <= 35) {
+  } else if (pm10 <= 80) {
     return {
       status: '보통',
       color: '#00C73C',
       icon: FaRegMeh
     }
-  } else if (pm10 <= 75) {
+  } else if (pm10 <= 150) {
     return {
       status: '나쁨',
       color: '#F36919',
@@ -29,35 +29,29 @@ export const getFineDust = (pm10: number): {status: string, color: string, icon:
 }
 
 export const getUltraFineDust = (pm2_5: number): {status: string, color: string, icon: IconType} => {
-  if (pm2_5 <= 30) {
+  if (pm2_5 <= 15) {
     return {
       status: '좋음', 
       color: '#32A1FF',
       icon: FaRegSmile
     }
-  } else if (pm2_5 <= 50) {
+  } else if (pm2_5 <= 35) {
     return {
       status: '보통', 
       color: '#00C73C',
       icon: FaRegMeh
     }
-  } else if (pm2_5 <= 100) {
+  } else if (pm2_5 <= 75) {
     return {
       status: '나쁨', 
       color: '#F36919',
       icon: FaRegFrown
     }
-  } else if (pm2_5 <= 150) {
+  } else {
     return {
       status: '매우 나쁨', 
       color: '#F44336',
       icon: FaSadTear
-    }
-  } else {
-    return {
-      status: '위험',
-      color: '#B71C1C',
-      icon: FaSadCry
     }
   }
 }

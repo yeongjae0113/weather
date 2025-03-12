@@ -6,7 +6,7 @@ export const generatePM10ChartData = (pm10: number): ChartData<'doughnut'> => {
     datasets: [
       {
         // label: '미세먼지 수치',
-        data: [pm10, 100 - pm10],
+        data: [pm10, 200 - pm10],
         backgroundColor: ['#F36919', '#E0E0E0'],
         borderWidth: 1,
       }

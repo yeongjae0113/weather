@@ -5,7 +5,7 @@ import { generatePM25ChartData, fineDustChartOptions } from '../../api/fine-dust
 import { FineDustData } from '../../api/fine-dust/fineDustType'
 
 const UltraFineDustChart: FC<{ data: FineDustData }> = ({ data }) => {
-  const pm2_5 = data.list[0].components.pm2_5
+  const pm2_5 = (data.list[0].components.pm2_5)
 
   const pm25ChartData = generatePM25ChartData(pm2_5)
 

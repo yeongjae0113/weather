@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { FineDustData, FineDustForecastData } from './fineDustType'
-import { weatherConfig } from '../../config/ApiConfig'
+import { weatherConfig } from '../../config/apiConfig'
 
 const getCityCoordinates = async (city: string) => {
   const geoResponse = await axios.get(

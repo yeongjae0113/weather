@@ -25,7 +25,7 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
     setGroupedData(grouped);
     
     if (Object.keys(grouped).length > 0) {
-      setSelectedDate(Object.keys(grouped)[1])  // 첫 번째 날짜로 초기화
+      setSelectedDate(Object.keys(grouped)[0])  // 첫 번째 날짜로 초기화
     }
     console.log('asjkldh: ', forecastData)
   }, [forecastData])

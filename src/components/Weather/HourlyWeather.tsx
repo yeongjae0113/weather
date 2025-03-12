@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { HourlyWeatherProps } from "../../api/weather/weatherTypes";
+import { HourlyProps, HourlyWeatherProps } from "../../api/weather/weatherTypes";
 
-const HourlyWeather = ({ hourlyData }: HourlyWeatherProps) => {
+const HourlyWeather = ({ hourlyData, city }: HourlyProps) => {
   const [selectedDate, setSelectedDate] = useState<string>('')
   const [groupedDates, setGroupedDates] = useState<{ date: string; hours: any[] }[]>([])
   
@@ -31,18 +31,27 @@ const HourlyWeather = ({ hourlyData }: HourlyWeatherProps) => {
   }
 
   const formatDate = (date: string) => {
-    const formatDate = new Date(date).toLocaleDateString('ko-KR', {
+    let formatDate = new Date(date).toLocaleDateString('ko-KR', {
       month: 'long',
       day: 'numeric'
     })
     return formatDate
   }
 
+  const formatDate2 = (date: string) => {
+    let formattedDate = date.replace(/\./g, '/')
+    formattedDate = formattedDate.replace(/\//g, ' /')
+    if (formattedDate.endsWith('/')) {
+      formattedDate = formattedDate.slice(0, -1)
+    }
+    return formattedDate
+  }
+
   if (!hourlyData || !hourlyData.list || hourlyData.list.length === 0) return null
 
   return (
     <div>
-      <h2 style={{marginTop: '2rem'}}>{hourlyData.city.name} 주간 예보</h2>
+      <h2 style={{marginTop: '2rem'}}>{city} 주간 예보</h2>
       <div style={{display: 'flex', gap: '1rem'}}>
         {groupedDates.map((dateGroup) => (
           <button
@@ -59,7 +68,7 @@ const HourlyWeather = ({ hourlyData }: HourlyWeatherProps) => {
               color: selectedDate === dateGroup.date ? 'white' : 'black',
             }}
           >
-            {dateGroup.date}
+            {formatDate2(dateGroup.date)}
           </button>
         ))}
       </div>

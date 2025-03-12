@@ -5,7 +5,7 @@ import { transformHourlyData } from "../../api/weather/chart";
 import { Line } from "react-chartjs-2";
 import { useCity } from "../../context/CityContext";
 
-ChartJS.register(...registerables);
+ChartJS.register(...registerables)
 
 const HourlyWeatherChart = () => {
   const { city } = useCity()
@@ -15,17 +15,17 @@ const HourlyWeatherChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const hourlyResponse = await fetchHourlyData(city);
-        const transformData = transformHourlyData(hourlyResponse);
-        setLabels(transformData.labels);
-        setData(transformData.data);
+        const hourlyResponse = await fetchHourlyData(city)
+        const transformData = transformHourlyData(hourlyResponse)
+        setLabels(transformData.labels)
+        setData(transformData.data)
       } catch (error) {
-        console.log("차트 에러: ", error);
+        console.log("차트 에러: ", error)
       }
-    };
+    }
 
-    fetchData();
-  }, [city]);
+    fetchData()
+  }, [city])
 
   const chartData = {
     labels,
@@ -39,16 +39,16 @@ const HourlyWeatherChart = () => {
         borderWidth: 1,
         pointBackgroundColor: data.map((temp) => (temp >= 0 ? "red" : "blue")),
         pointBorderColor: data.map((temp) => (temp >= 0 ? "red" : "blue")),
-      },
-    ],
-  };
+      }
+    ]
+  }
 
   const chartOptions = {
     responsive: true,
     plugins: {
       legend: {
         position: "top" as const,
-      },
+      }
     },
     scales: {
       y: {
@@ -56,15 +56,15 @@ const HourlyWeatherChart = () => {
         title: {
           display: true,
           text: "온도 (°C)",
-        },
+        }
       },
       x: {
         title: {
           display: true,
-        },
-      },
-    },
-  };
+        }
+      }
+    }
+  }
 
   return (
     <div
@@ -77,7 +77,7 @@ const HourlyWeatherChart = () => {
     >
       <Line data={chartData} options={chartOptions} height={20} width={65} />
     </div>
-  );
-};
+  )
+}
 
-export default HourlyWeatherChart;
+export default HourlyWeatherChart

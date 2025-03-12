@@ -79,3 +79,11 @@ export interface WeatherMaps {
 export interface WeahterMapProps {
   city: string
 }
+
+export interface Props extends CurrentWeatherProps {
+  city: string
+}
+
+export interface HourlyProps extends HourlyWeatherProps {
+  city: string
+}
