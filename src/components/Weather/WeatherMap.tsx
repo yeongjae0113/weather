@@ -8,7 +8,6 @@ const WeatherMap = ({city}: WeahterMapProps) => {
   const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(null)
 
   useEffect(() => {
-    console.log("현재 좌표 상태:", coords);
   }, [coords])
 
   useEffect(() => {

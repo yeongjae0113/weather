@@ -52,7 +52,7 @@ const HourlyWeatherChart = () => {
     },
     scales: {
       y: {
-        beginAtZero: false,
+        // beginAtZero: false,
         title: {
           display: true,
           text: "온도 (°C)",

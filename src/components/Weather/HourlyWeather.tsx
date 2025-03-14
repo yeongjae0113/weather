@@ -5,20 +5,29 @@ import { formatDate, formatDate2, formatTime2 } from "../../utils/WeatherUtils";
 const HourlyWeather = ({ hourlyData, city }: HourlyProps) => {
   const [selectedDate, setSelectedDate] = useState<string>('')
   const [groupedDates, setGroupedDates] = useState<{ date: string, hours: any[] }[]>([])
-  
+   
   useEffect(() => {
     if (!hourlyData || !hourlyData.list) return
     
-    const grouped = hourlyData.list.reduce<{ date: string, hours: any[] }[]>((acc, hour) => {
-      const date = new Date(hour.dt * 1000).toLocaleDateString('ko-KR', {
-        year: 'numeric',
+    const filteredData = hourlyData.list.filter((item) => {
+      const kTime = new Date(item.dt * 1000)
+      const kHour = kTime.getHours()
+      console.log(kTime, kHour)
+      return kHour >= 0 && kHour <= 23
+    })
+    console.log(filteredData)
+
+    const grouped = filteredData.reduce<{ date: string, hours: any[] }[]>((acc, hour) => {
+
+      const date = new Date((hour.dt + 9) * 1000).toLocaleDateString('ko-KR', {
+        year: 'numeric', 
         month: '2-digit',
         day: '2-digit'
-      })
-      console.log(date)
+      }) 
+      
       const existingGroup = acc.find((group) => group.date === date)
-
-      if (existingGroup) {
+      // console.log(existingGroup) 
+      if (existingGroup) { 
         existingGroup.hours.push(hour)
       } else {
         acc.push({ date, hours: [hour] })
@@ -35,15 +44,6 @@ const HourlyWeather = ({ hourlyData, city }: HourlyProps) => {
   const handleSelectedDate = (date: string) => {
     setSelectedDate(date)
   }
-
-  // const formatDate2 = (date: string) => {
-  //   let formattedDate = date.replace(/\./g, '/')
-  //   formattedDate = formattedDate.replace(/\//g, ' /')
-  //   if (formattedDate.endsWith('/')) {
-  //     formattedDate = formattedDate.slice(0, -1)
-  //   }
-  //   return formattedDate
-  // }
 
   if (!hourlyData || !hourlyData.list || hourlyData.list.length === 0) return null
 
@@ -97,8 +97,7 @@ const HourlyWeather = ({ hourlyData, city }: HourlyProps) => {
                         boxSizing: 'border-box',
                       }}
                     >
-                      <p>{hour.weather[0]?.description}{console.log(hour.weather)}</p>
-                      
+                      <p>{hour.weather[0]?.description}</p>
                       <img
                         src={`https://openweathermap.org/img/wn/${hour.weather[0]?.icon}.png`}
                         alt='weather icon'

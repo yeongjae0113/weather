@@ -34,6 +34,7 @@ const CurrentFineDust = ({ fineDustData, forecastData }: FineDustResponse) => {
     })
 
     const morningData = tomorrowData.filter((forecastData) => new Date(forecastData.dt * 1000).getHours() < 12)
+    console.log('아침 데이터: ', morningData)
     const afternoonData = tomorrowData.filter((forecastData) => new Date(forecastData.dt * 1000).getHours() >= 12)
 
     const calculateAverage = (data: any[]) => {
@@ -47,6 +48,7 @@ const CurrentFineDust = ({ fineDustData, forecastData }: FineDustResponse) => {
       }
     }
     const morningAverage = calculateAverage(morningData)
+    console.log(morningAverage)
     const afternoonAverage = calculateAverage(afternoonData)
 
     setAverageDust({

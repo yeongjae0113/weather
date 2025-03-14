@@ -15,7 +15,6 @@ const AirQualityNews = () => {
 
   useEffect(() => {
     getNews()
-    console.log('category: ', category)
   }, [language, category])
 
   const getNews = async() => {

@@ -24,9 +24,10 @@ export function transformHourlyData(hourlyData: HourlyResponse) {
             hour: '2-digit', 
             // minute: '2-digit' 
           }
-
+          
       let formattedDate = date.toLocaleString('ko-KR', options)
       formattedDate = formattedDate.replace(/0?(\d{1,2})\.\s0?(\d{1,2})\./, '$1/$2')
+      
       console.log(formattedDate)
       labels.push(formattedDate)
       data.push(Math.floor(item.main.temp))   // 온도 데이터 추가

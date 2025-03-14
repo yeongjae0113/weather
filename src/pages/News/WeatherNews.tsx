@@ -15,14 +15,11 @@ const WeatherNews = () => {
   
   useEffect(() => {
     getNews()
-    console.log('category: ', category)
   }, [language, category])
 
   const getNews = async () => {
     try {
       const data = await fetchNews(language, category)
-      console.log('data: ', data)
-      console.log('language: ', language)
       setNewsData(data)
       setCurrentPage(1)
       console.log('뉴스 개수: ', data.articles.length)

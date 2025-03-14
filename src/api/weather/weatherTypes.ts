@@ -82,6 +82,7 @@ export interface WeahterMapProps {
 
 export interface Props extends CurrentWeatherProps {
   city: string
+  hourlyData: HourlyResponse | null
 }
 
 export interface HourlyProps extends HourlyWeatherProps {

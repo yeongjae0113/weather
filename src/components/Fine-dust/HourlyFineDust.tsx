@@ -41,13 +41,13 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                 onClick={() => setSelectedDate(date)}
                 style={{
                   fontSize: '0.9rem',
-                  fontWeight: "bold",
-                  padding: "0.5rem 1rem",
-                  border: "none",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  backgroundColor: selectedDate === date ? "black" : "rgb(215 215 215)",
-                  color: selectedDate === date ? "white" : "black",
+                  fontWeight: 'bold',
+                  padding: '0.5rem 1rem',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                  backgroundColor: selectedDate === date ? 'black' : 'rgb(215 215 215)',
+                  color: selectedDate === date ? 'white' : 'black',
                 }}
               >
                 {formatDate2(date)}
@@ -85,8 +85,8 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                         {getFineDust(forecast.components.pm10).status}
                         <Icon
                           style={{
-                            fontSize: "20px",
-                            marginLeft: "0.5rem",
+                            fontSize: '20px',
+                            marginLeft: '0.5rem',
                             color: getFineDust(forecast.components.pm10).color,
                           }}
                           component={getFineDust(forecast.components.pm10).icon}  
@@ -96,8 +96,8 @@ const HourlyFineDust = ({ forecastData }: HourlyFineDustResponse) => {
                         {getUltraFineDust(forecast.components.pm2_5).status}
                         <Icon
                           style={{
-                            fontSize: "20px",
-                            marginLeft: "0.5rem",
+                            fontSize: '20px',
+                            marginLeft: '0.5rem',
                             color: getUltraFineDust(forecast.components.pm2_5).color,
                           }}
                           component={getUltraFineDust(forecast.components.pm2_5).icon}  

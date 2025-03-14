@@ -3,8 +3,9 @@ import { CurrentWeatherProps, Props } from "../../api/weather/weatherTypes";
 import WeatherMap from "./WeatherMap";
 import Favorites from "./Favorites";
 import { formatTime, getRegion, getWindDirection } from "../../utils/WeatherUtils";
+import TomorrowChart from "../Chart/TomorrowChart";
 
-const CurrentWeather = ({ weatherData, city }: Props) => {
+const CurrentWeather = ({ weatherData, hourlyData, city }: Props ) => {
   const [isFavorites, setIsFavorites] = useState<boolean>(false)
   const [isDialog, setIsDialog] = useState<boolean>(false)
 
@@ -43,56 +44,58 @@ const CurrentWeather = ({ weatherData, city }: Props) => {
 
   const handleCloseDialog = () => {
     setIsDialog(false)
-    console.log(isDialog)
   }
 
   return (
     <div style={{alignContent: 'center'}}>
       <div style={{display: 'flex', alignItems: 'center', marginTop: '2rem'}}>
 
-        {!isFavorites ? (
-          <button
-            onClick={handleFavorites}
-            style={{
-              width: '4rem',
-              border: 'none',
-              background: 'none',
-            }}
-          >
-            <img src="/img/star2.png" alt="즐겨찾기 등록안됨" 
-              style={{width: '2rem', height: '3rem', objectFit: 'contain'}}
-            />
-          </button>
+        <div style={{display: 'flex'}}>
+          {!isFavorites ? (
+            <button
+              onClick={handleFavorites}
+              style={{
+                width: '4rem',
+                border: 'none',
+                background: 'none',
+              }}
+            >
+              <img src="/img/star2.png" alt="즐겨찾기 등록안됨" 
+                style={{width: '2rem', height: '3rem', objectFit: 'contain'}}
+              />
+            </button>
           ) : (
-          <button
-            onClick={handleNotFavorites}
+            <button
+              onClick={handleNotFavorites}
+              style={{
+                width: '4rem',
+                border: 'none',
+                background: 'none',
+              }}
+            >
+              <img src="/img/star.png" alt="즐겨찾기 등록됨" 
+                style={{width: '3rem', height: '3rem', objectFit: 'contain'}}
+              />
+            </button>
+          )}
+
+          <button 
+            onClick={handleOpenDialog}
             style={{
-              width: '4rem',
+              height: '100%',
+              alignSelf: 'center',
               border: 'none',
-              background: 'none',
+              borderRadius: '0.3rem',
+              fontWeight: 'bold',
+              padding: '0.4rem',
+              cursor: 'pointer',
             }}
           >
-            <img src="/img/star.png" alt="즐겨찾기 등록됨" 
-              style={{width: '3rem', height: '3rem', objectFit: 'contain'}}
-            />
+            즐겨찾기 목록
           </button>
-        )}
+        </div>
 
-        <button 
-          onClick={handleOpenDialog}
-          style={{
-            border: 'none',
-            borderRadius: '0.3rem',
-            // background: 'none',
-            fontWeight: 'bold',
-            padding: '0.4rem',
-            cursor: 'pointer',
-          }}
-        >
-          즐겨찾기 목록
-        </button>
-
-        <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', flex: 0.88, alignItems: 'center'}}>
+        <div style={{display: 'flex', height: '8rem', justifyContent: 'center', flexDirection: 'column', flex: 1.5, alignItems: 'center'}}>
           <h2 style={{textAlign: 'center', margin: '0'}}>{city}</h2>
           <img
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0]?.icon}@2x.png`}
@@ -100,11 +103,17 @@ const CurrentWeather = ({ weatherData, city }: Props) => {
             style={{width: '7%'}}
           />
         </div>
+        
+        <TomorrowChart 
+          hourlyData={hourlyData}
+        />
+
       </div>
       <Favorites 
         isDialog={isDialog}
         handleCloseDialog={handleCloseDialog}
       />
+
       
       <div style={{display: 'flex', justifyContent: 'center', width: '100%', borderBottom: '2px solid #d9d9d9'}}>
         <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>

@@ -39,6 +39,7 @@ const Weather = () => {
         {weatherData && weatherData.weather.length > 0 && (
           <CurrentWeather 
             weatherData={weatherData} 
+            hourlyData={hourlyData}
             city={city}
           />
         )}

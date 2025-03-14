@@ -96,8 +96,9 @@ export const fetchHourlyData = async (city: string): Promise<HourlyResponse> => 
 
 export const fetchWeatherMap = async (city: string): Promise<WeatherMaps> => {
   try {
+    const formatCity = cityMap[city] || city
     const response = await axios.get<WeatherMaps>(
-      `/weather-api/data/2.5/weather?q=${city}&appid=${weatherConfig.apiKey}&units=metric`
+      `/weather-api/data/2.5/weather?q=${formatCity}&appid=${weatherConfig.apiKey}&units=metric`
     )
     return response.data
   } catch (error) {
