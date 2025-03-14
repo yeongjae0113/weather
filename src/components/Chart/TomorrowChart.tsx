@@ -133,7 +133,7 @@ const TomorrowChart = ({hourlyData}: {hourlyData: HourlyResponse | null}) => {
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center',
-              color: morningAvgTemp1 >= 0 ? 'red' : 'blue' 
+              // color: morningAvgTemp1 >= 0 ? 'red' : 'blue' 
             }}
           >
             {Math.floor(Number(morningAvgTemp2))}°C
