@@ -37,21 +37,26 @@ OpenWeatherMap API 와 News API에서 받아온 다양한 기상 데이터를 �
 
 | <h4> 미세먼지 페이지 </h4> |
 | :-------------------------------------------: |
-| <img width="100%" alt="미세먼지 페이지" src="https://github.com/user-attachments/assets/4b881cde-dab0-40b3-aaf7-60ba98747936" /> |
+| <img width="100%" alt="미세먼지 페이지" src="https://github.com/user-attachments/assets/3b6a28b2-f561-4bb5-8748-34b834bd33ce" /> |
 | <div align="left"> **1. 검색 지역의 현재 미세먼지 및 초미세먼지 정보와 주간 예보 정보를 열람할 수 있습니다.** <br/> **2. 각 버튼을 눌러 사용자가 원하는 날짜의 미세먼지 정보를 열람할 수 있습니다.** <br/> **3. 도넛 그래프를 통해 사용자가 더 쉽게 정보를 얻을 수 있습니다** </div> |
 
 <br />
 
 | <h4> 기상 뉴스 페이지 </h4> |
 | :-------------------------------------------: |
-| <img width="100%" alt="기상 뉴스 페이지" src="https://github.com/user-attachments/assets/c2a1b1b6-206f-497f-b2da-e76a08645192" /> |
+| <img width="100%" alt="기상 뉴스 페이지" src="https://github.com/user-attachments/assets/8936c06f-efb2-4591-bcc4-1ac7003eb80b" /> |
 | <div align="left"> **한국, 중국, 해외 총 세 가지의 카테고리로 나누어 기상 관련 뉴스를 열람할 수 있습니다.** </div> |
 
 <br />
 
 | <h4> 대기질 뉴스 페이지 </h4> |
 | :-------------------------------------------: |
-| <img width="100%" alt="대기질 뉴스 페이지" src="https://github.com/user-attachments/assets/a07bca56-11f8-431c-b720-99eda328d928" /> |
+| <img width="100%" alt="대기질 뉴스 페이지" src="https://github.com/user-attachments/assets/8224ce68-fb35-42d6-bb23-854d55d1f7de" /> |
 | <div align="left"> **기상 뉴스 페이지와 같이 한국, 중국, 해외 총 세 가지의 카테고리로 나누어 대기질 관련 뉴스를 열람할 수 있습니다.** </div> |
 
 <br />
+
+| <h4> 회원탈퇴 페이지 </h4> |
+| :-------------------------------------------: |
+| <img width="100%" alt="대기질 뉴스 페이지" src="https://github.com/user-attachments/assets/d84e43f5-c429-4de5-b8a7-9219691191dc" /> |
+| <div align="left"> **1. 서비스를 더이상 이용하고 싶지 않을 때 이용하는 회원탈퇴를 할 수 있는 페이지입니다.** <br/> **2."회원탈퇴" 를 정확히 입력해야 회원탈퇴 버튼이 활성화됩니다.** </div> |
