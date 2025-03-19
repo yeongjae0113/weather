@@ -23,7 +23,7 @@ OpenWeatherMap API 와 News API에서 받아온 다양한 기상 데이터를 �
 ## 🙋‍♂️ 주요 기능
 | 🙋‍♂️ 기능 설명 |
 |--------------|
-| - 💾 **현재 날씨 및 시간별 날씨 정보 제공** <br>- 🛡️ **현재 및 시간별 미세먼지, 초미세먼지 정보 제공** <br>- 🧪 **즐겨찾기 CRUD 구현** <br>- 🪪 **도시 검색** <br>- 📊 **날씨 API 통합** <br>- 🎨 **Chart.js를 활용한 날씨 그래프 구현** <br>- 🗃️ **Leaflet을 활용한 지도 구현** <br>- 🚀 **Doughnut chart를 활용한 미세먼지 도넛 그래프 구현** |
+| - 💾 **현재 날씨 및 시간별 날씨 정보 제공** <br>- 🛡️ **현재 및 시간별 미세먼지, 초미세먼지 정보 제공** <br>- 🧪 **즐겨찾기 CRUD 구현** <br>- 🪪 **도시 검색** <br>- 📊 **날씨 API 통합** <br>- 🎨 **Chart.js를 활용한 날씨 그래프 구현** <br>- 🗃️ **Leaflet을 활용한 지도 구현** <br>- 🚀 **Doughnut chart를 활용한 미세먼지 도넛 그래프 구현** <br>- 📀 **ERD 설계** |
 
 ## 📊 ERD (Entity-Relationship Diagram)
 <img width="100%" alt="ERD" src="https://github.com/user-attachments/assets/d9ea4022-ffeb-4c60-a0e7-56ff794abeed"/>
